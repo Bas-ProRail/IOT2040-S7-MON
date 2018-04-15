@@ -1,0 +1,18 @@
+{
+  "pipelineId" : "randomToIdentityToTrash",
+  "title" : "randomToIdentityToTrash",
+  "description" : "",
+  "created" : 1502554489114,
+  "lastModified" : 1502554489161,
+  "creator" : "admin",
+  "lastModifier" : "admin",
+  "lastRev" : "0",
+  "uuid" : "5bbcec33-a227-4555-9f42-b17f91986f33",
+  "valid" : true,
+  "metadata" : {
+    "labels" : [ ]
+  },
+  "name" : "randomToIdentityToTrash",
+  "sdcVersion" : "2.7.0.0",
+  "sdcId" : "8a12d6ca-7e3b-11e7-a048-91430e5997d6"
+}
