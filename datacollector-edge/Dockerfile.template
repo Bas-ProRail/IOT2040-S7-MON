@@ -7,8 +7,10 @@ ENV INITSYSTEM on
 COPY . $GOPATH/src/github.com/streamsets
 
 #build all the Go source with gradle.
-RUN cd $GOPATH/src/github.com/streamsets
-RUN ./gradlew clean build
+RUN cd $GOPATH
+RUN go get github.com/gradle/gradle
+RUN go install github.com/gradle/gradle/..
+RUN gradlew clean build
 
 #tell our container to run the binary on start.
 CMD ["./main"]
