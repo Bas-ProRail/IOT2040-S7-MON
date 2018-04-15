@@ -4,12 +4,10 @@ FROM resin/%%RESIN_MACHINE_NAME%%-golang:latest
 ENV INITSYSTEM on
 
 #Copy all the code into /go
-COPY . $GOPATH/src/github.com/streamsets
+COPY ./datacollector/. $GOPATH/src/github.com/streamsets
 
 #build all the Go source with gradle.
 RUN cd $GOPATH/src/github.com/streamsets
-# RUN go get github.com/constabulary/gb
-# RUN go install github.com/constabulary/gb/...
 RUN gradlew buildDockerImage
 
 #tell our container to run the binary on start.
