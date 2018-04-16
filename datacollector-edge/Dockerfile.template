@@ -8,8 +8,9 @@ COPY ./ $GOPATH/src
 
 #build all the Go source with gradle.
 RUN cd $GOPATH/src
-RUN chmod 0777 $GOPATH/src/gradlew
-RUN $GOPATH/src/gradlew cleaN build
+RUN ls -l
+#RUN chmod 0777 $GOPATH/src/gradlew
+#RUN $GOPATH/src/gradlew cleaN build
 
 #tell our container to run the binary on start.
-CMD ["./main"]
+#CMD ["./main"]
