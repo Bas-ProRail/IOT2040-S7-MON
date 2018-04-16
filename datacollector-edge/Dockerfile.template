@@ -3,11 +3,14 @@ FROM resin/%%RESIN_MACHINE_NAME%%-golang:latest
 
 ENV INITSYSTEM on
 
+# Defines our working directory in container
+WORKDIR /usr/src/app
+
 #Copy all the code into /go
-COPY ./ $GOPATH/src/
+COPY . ./
 
 #build all the Go source with gradle.
-RUN cd $GOPATH/src/
+#RUN cd $GOPATH/src/
 RUN ls -l
 #RUN chmod 0777 $GOPATH/src/gradlew
 #RUN $GOPATH/src/gradlew cleaN build
