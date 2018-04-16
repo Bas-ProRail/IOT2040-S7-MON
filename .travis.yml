@@ -1,4 +1,9 @@
 install: true  
+addons:
+  ssh_known_hosts: 
+  - git.resinstaging.io
+  - git.resin.io
+
 script:  
   - eval "$(ssh-agent -s)" #start the ssh agent
   - echo -e $RESIN_DEPLOY_KEY > id_rsa
