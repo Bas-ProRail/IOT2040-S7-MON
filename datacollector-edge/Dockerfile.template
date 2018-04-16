@@ -4,12 +4,12 @@ FROM resin/%%RESIN_MACHINE_NAME%%-golang:latest
 ENV INITSYSTEM on
 
 #Copy all the code into /go
-COPY ./ $GOPATH/src/github.com/streamsets
+COPY ./ $GOPATH/src
 
 #build all the Go source with gradle.
-RUN cd $GOPATH/src/github.com/streamsets
-RUN chmod 0777 $GOPATH/src/github.com/streamsets/gradlew
-RUN $GOPATH/src/github.com/streamsets/gradlew buildDockerImage
+RUN cd $GOPATH/src
+RUN chmod 0777 $GOPATH/src/gradlew
+RUN $GOPATH/src/gradlew cleaN build
 
 #tell our container to run the binary on start.
 CMD ["./main"]
