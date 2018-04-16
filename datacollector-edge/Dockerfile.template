@@ -14,7 +14,7 @@ COPY . ./
 RUN ls -l
 RUN chmod 0777 ./gradlew
 RUN ls -l
-RUN ./gradlew test
+RUN ./gradlew check
 
 #tell our container to run the binary on start.
 #CMD ["./main"]
