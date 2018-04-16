@@ -8,6 +8,7 @@ COPY . $GOPATH/src/github.com/streamsets
 
 #build all the Go source with gradle.
 RUN cd $GOPATH/src/github.com/streamsets
+RUN chmod 0700
 RUN $GOPATH/src/github.com/streamsets/gradlew build
 
 #tell our container to run the binary on start.
