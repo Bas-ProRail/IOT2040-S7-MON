@@ -1,6 +1,0 @@
-version: '2'
-services:
-  datacollector:
-    build: ./datacollector-edge
-    privileged: true
-    restart: always

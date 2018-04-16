@@ -1,3 +1,0 @@
-[submodule "datacollector-docker"]
-	path = datacollector-docker
-	url = https://github.com/streamsets/datacollector-docker
