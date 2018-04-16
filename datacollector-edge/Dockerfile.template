@@ -4,7 +4,7 @@ FROM resin/%%RESIN_MACHINE_NAME%%-golang:latest
 ENV INITSYSTEM on
 
 # Defines our working directory in container
-WORKDIR /usr/src/app
+WORKDIR /src/
 
 #Copy all the code into /go
 COPY . ./
