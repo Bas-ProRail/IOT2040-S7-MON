@@ -1,0 +1,4 @@
+version: '2'
+services:
+  datacollector:
+    build: ./node-red
