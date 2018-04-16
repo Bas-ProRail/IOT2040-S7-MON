@@ -4,7 +4,7 @@ FROM resin/%%RESIN_MACHINE_NAME%%-golang:latest
 ENV INITSYSTEM on
 
 #Copy all the code into /go
-COPY . $GOPATH/src/github.com/streamsets
+COPY / $GOPATH/src/github.com/streamsets
 
 #build all the Go source with gradle.
 RUN cd $GOPATH/src/github.com/streamsets
