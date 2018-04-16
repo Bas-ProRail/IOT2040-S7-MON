@@ -8,6 +8,7 @@ WORKDIR /src/
 
 #Copy all the code into /go
 COPY . ./
+RUN cd ..
 
 #build all the Go source with gradle.
 #RUN cd $GOPATH/src/
