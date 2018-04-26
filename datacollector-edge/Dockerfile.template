@@ -1,4 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-alpine-openjdk:3.6
+FROM resin/%%RESIN_MACHINE_NAME%%-alpine-openjdk
 
 ENV INITSYSTEM=on
 
