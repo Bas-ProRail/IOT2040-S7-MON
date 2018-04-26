@@ -35,6 +35,11 @@ RUN apk update && \
 	apk add git && \
 	rm -rf /var/cache/apk/*
 
+#install gcc (not on depslist datacollector-edge, but necessary for golang build)
+RUN apk update && \
+	apk add gcc && \
+	rm -rf /var/cache/apk/*	
+	
 #install docker-ce.18.03.0 from community packagelist
 RUN apk update && \
 	apk add docker --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community --allow-untrusted && \
