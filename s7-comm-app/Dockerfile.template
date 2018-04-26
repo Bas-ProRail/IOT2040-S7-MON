@@ -1,0 +1,10 @@
+FROM resin/%%RESIN_MACHINE_NAME%%-debian:wheezy
+
+RUN apt-get update
+RUN apt-get install -y libmono2.0-cil mono-runtime
+
+ADD bin/* /app/
+
+ENV INITSYSTEM=on
+
+CMD ["mono", "/app/s7-comm-app.exe"]

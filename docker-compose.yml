@@ -1,0 +1,8 @@
+version: '2'
+services:
+  s7comm:
+    build: ./s7-comm-app
+    privileged: true
+  datacollector:
+    build: ./datacollector-edge
+    privileged: true

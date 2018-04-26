@@ -1,0 +1,70 @@
+FROM resin/%%RESIN_MACHINE_NAME%%-alpine-openjdk
+
+ENV INITSYSTEM=on
+
+# Environment
+ENV IVY_HOME /cache
+ENV GRADLE_VERSION 2.6
+ENV GRADLE_HOME /usr/local/gradle
+ENV PATH ${PATH}:${GRADLE_HOME}/bin
+ENV GRADLE_USER_HOME /gradle
+
+#Change working folder for installing deps
+WORKDIR /usr/local
+# Install gradle
+RUN wget  https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip && \
+    unzip gradle-$GRADLE_VERSION-bin.zip && \
+    rm -f gradle-$GRADLE_VERSION-bin.zip && \
+    ln -s gradle-$GRADLE_VERSION gradle && \
+    echo -ne "- with Gradle $GRADLE_VERSION\n" >> /root/.built
+	
+#Install gradle deps
+RUN apk update && \
+	apk add libstdc++ && \
+	rm -rf /var/cache/apk/*
+	
+RUN mkdir -p /gradle && mkdir -p /app
+
+#install GO
+RUN apk update && \
+	apk add go && \
+	rm -rf /var/cache/apk/*
+
+#install Git (not on depslist datacollector-edge, but necessary for git list calls in gradle.build)
+RUN apk update && \
+	apk add git && \
+	rm -rf /var/cache/apk/*
+
+#install docker-ce.18.03.0 from community packagelist
+RUN apk update && \
+	apk add docker --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community --allow-untrusted && \
+	rm -rf /var/cache/apk/*
+
+#Create copy folder for golang app
+RUN mkdir -p $GOPATH/src/github.com/streamsets
+
+#Change focus for gradle to projectroot
+WORKDIR $GOPATH/src/github.com/streamsets
+ENTRYPOINT gradle
+
+#Copy all projectfiles and directories - change owner of gradlew file
+COPY ./app/ $GOPATH/src/github.com/streamsets/
+RUN chmod 0755 gradlew
+
+#Run git command init workaround because gradle uses git repository structure for git list command in gradle.build
+RUN pwd && ls -l
+RUN git init && \
+	git config --global user.email "john@doe.com" && \
+	git config --global user.name "John Doe" && \
+	git add --all && \
+	git commit -m "Initial commit"
+
+#debug
+RUN ls -la $GOPATH/src/github.com/streamsets
+
+#issue build command
+RUN ./gradlew clean build
+
+#start datacollector-edge
+WORKDIR ./dist/
+CMD bin/edge
