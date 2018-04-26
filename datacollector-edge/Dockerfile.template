@@ -1,4 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-alpine-openjdk
+FROM resin/%%RESIN_MACHINE_NAME%%-alpine-openjdk:3.6
 
 ENV INITSYSTEM=on
 
@@ -35,6 +35,11 @@ RUN apk update && \
 	apk add git && \
 	rm -rf /var/cache/apk/*
 
+#install musl.dev (not on depslist datacollector-edge, but necessary for missing files in alpine image)
+RUN apk update && \
+	apk add musl-dev && \
+	rm -rf /var/cache/apk/*	
+	
 #Create copy folder for golang app
 RUN mkdir -p $GOPATH/src/github.com/streamsets
 
