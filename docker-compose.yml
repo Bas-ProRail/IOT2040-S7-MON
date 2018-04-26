@@ -6,4 +6,6 @@ services:
   datacollector:
     build: ./datacollector-edge
     privileged: true
-    expose: "18633"
+    expose: 
+	- "18633"
+	
